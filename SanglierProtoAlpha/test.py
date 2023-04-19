@@ -1,15 +1,15 @@
-import tkinter as tk
-from tkinter import ttk
+data = [    ["Café", "Boisson chaude", "2.50"],
+    ["Thé", "Boisson chaude", "2.00"],
+    ["Coca-Cola", "Boisson froide", "3.00"],
+    ["Jus d'orange", "Boisson froide", "3.50"],
+    ["demi de blonde","Bière","5"]  ]
 
-# créer une nouvelle fenêtre
-root = tk.Tk()
+data3 = []
+Name = ['Café','Thé','Coca']
+Categorie = ['Beer','Exceptionnel','Soft']
+Prix = ['2','7','5']
 
-# créer une liste d'options pour la liste déroulante
-options = ["Option 1", "Option 2", "Option 3"]
-
-# créer la liste déroulante
-combobox = ttk.Combobox(root, values=options)
-combobox.pack()
-
-# démarrer la boucle principale de la fenêtre
-root.mainloop()
+for i in range(len(Name)):
+    New_Drink = [Name[i],Categorie[i],Prix[i]]
+    data3.append(New_Drink)
+print(data3)

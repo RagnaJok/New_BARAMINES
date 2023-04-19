@@ -8,22 +8,51 @@ def Create_Frame():
     frame.pack(fill='both', expand=True,padx=20,pady=20)
     frame.place(relx=0.4, rely=0.08, anchor="n")
 
-def create_table(frame):
+def create_table(frame, drink_data):
     # Création du tableau pour afficher la carte des boissons
     header = ["Boisson", "Catégorie", "Prix"]
     for col, heading in enumerate(header):
         label = tk.Label(frame, text=heading, font=('Century SchoolBook', 12, 'bold'), width=15)
         label.grid(row=0, column=col)
 
-def update_table(frame):
+    # Création d'une ligne pour chaque donnée
+    for i, drink in enumerate(drink_data):
+        row = drink_data[drink]
+        print(row)
+        # Création d'un cadre pour chaque cellule
+        cell_frame1 = tk.Frame(frame, borderwidth=1, relief='ridge')
+        cell_frame1.grid(row=i+1, column=0, sticky='nsew', padx=5, pady=5)
+        label1 = tk.Label(cell_frame1, text=drink, font=('Arial', 12))
+        label1.pack(padx=5, pady=5, expand=True, fill='both')
+
+        cell_frame2 = tk.Frame(frame, borderwidth=1, relief='ridge')
+        cell_frame2.grid(row=i+1, column=1, sticky='nsew', padx=5, pady=5)
+        label2 = tk.Label(cell_frame2, text=row["category"], font=('Arial', 12))
+        label2.pack(padx=5, pady=5, expand=True, fill='both')
+
+        cell_frame3 = tk.Frame(frame, borderwidth=1, relief='ridge')
+        cell_frame3.grid(row=i+1, column=2, sticky='nsew', padx=5, pady=5)
+        label3 = tk.Label(cell_frame3, text=row["price"], font=('Arial', 12))
+        label3.pack(padx=5, pady=5, expand=True, fill='both')
+
+        # Ajout d'un séparateur entre chaque ligne
+        sep = ttk.Separator(frame, orient='horizontal')
+        sep.grid(row=i+2, column=0, columnspan=3, sticky='ew', padx=5, pady=5)
+
+def update_table(frame, drink_data):
     # Supprimer les anciennes données du tableau
     for widget in frame.winfo_children():
         widget.destroy()
 
     # Insérer les nouvelles données dans le tableau
     header = ["Boisson", "Catégorie", "Prix"]
-    for row, data in enumerate(zip(Name, Categorie, Prix), start=1):
-        for col, value in enumerate(data):
+    a=1
+    for row, (name, drink) in enumerate(drink_data.items(), start=1):
+        a+=1
+        print(a)
+        category = drink["category"]
+        price = drink["price"]
+        for col, value in enumerate([name, category, price]):
             label = tk.Label(frame, text=value, font=('Century SchoolBook', 12), width=15)
             label.grid(row=row, column=col)
 
@@ -34,9 +63,7 @@ def update_table(frame):
 
 def AjoutDrink():
     def Ajouter():
-        Name.append(Name_entry.get())
-        Categorie.append(Category_entry.get())
-        Prix.append(Price_entry.get())
+        drink_data[Name_entry.get()] = {'category': Category_entry.get(), 'price': Price_entry.get()}
         print(Name,Categorie,Prix)
         RefreshDrink()
         Modif.destroy()
@@ -73,7 +100,8 @@ def AjoutDrink():
 
     Category_label = tk.Label(Modif, text="Catégorie :",font=('Century SchoolBook',12))
     Category_label.place(relx=0.29,rely=0.4)
-    Category_entry = ttk.Combobox(Modif,values=Categorie,width=15)
+    categories = [drink['category'] for drink in drink_data.values()]
+    Category_entry = ttk.Combobox(Modif, values=categories, width=15)
     Category_entry.place(relx=0.45,rely=0.4)
     
 
@@ -135,7 +163,7 @@ def DeleteDrink():
     Validate.place(relx= 0.5,rely=0.9,anchor='s')
 
 def RefreshDrink():
-    update_table(frame)
+    update_table(frame,drink_data)
 
 if __name__ == '__main__':
     # Créer une nouvelle fenêtre
@@ -180,27 +208,30 @@ if __name__ == '__main__':
     Name = ['Café','Thé','Coca']
     Categorie = ['Beer','Exceptionnel','Soft']
     Prix = ['2','7','3']
-    data = []
-    for i in range(len(Name)):
-        New_Drink = [Name[i],Categorie[i],Prix[i]]
-        data.append(New_Drink)
-    # Création d'une ligne pour chaque donnée
-    for i, row in enumerate(data):
-        for j, cell in enumerate(row):
-            # Création d'un cadre pour chaque cellule
-            cell_frame = tk.Frame(frame, borderwidth=1, relief='ridge')
-            cell_frame.grid(row=i+1, column=j, sticky='nsew', padx=5, pady=5)
+    
+    global drink_data
+    drink_data = {'Coca-Cola': {'category': 'Boisson gazeuse', 'price': '2.50'},
+              'Pepsi': {'category': 'Boisson gazeuse', 'price': '2.00'},
+              'Sprite': {'category': 'Boisson gazeuse', 'price': '2.00'},
+              "Jus d'orange": {'category': 'Jus de fruit', 'price': '3.00'}}
+
+    # # Création d'une ligne pour chaque donnée
+    # for i, row in enumerate(data):
+    #     for j, cell in enumerate(row):
+    #         # Création d'un cadre pour chaque cellule
+    #         cell_frame = tk.Frame(frame, borderwidth=1, relief='ridge')
+    #         cell_frame.grid(row=i+1, column=j, sticky='nsew', padx=5, pady=5)
             
-            # Ajout de la donnée dans le cadre
-            label = tk.Label(cell_frame, text=cell, font=('Arial', 12))
-            label.pack(padx=5, pady=5, expand=True, fill='both')
+    #         # Ajout de la donnée dans le cadre
+    #         label = tk.Label(cell_frame, text=cell, font=('Arial', 12))
+    #         label.pack(padx=5, pady=5, expand=True, fill='both')
         
-        # Ajout d'un séparateur entre chaque ligne
-        sep = ttk.Separator(frame, orient='horizontal')
-        sep.grid(row=i+2, column=0, columnspan=3, sticky='ew', padx=5, pady=5)
+    #     # Ajout d'un séparateur entre chaque ligne
+    #     sep = ttk.Separator(frame, orient='horizontal')
+    #     sep.grid(row=i+2, column=0, columnspan=3, sticky='ew', padx=5, pady=5)
 
     # Appel de la fonction pour créer le tableau
-    create_table(frame)
+    create_table(frame,drink_data)
 
     # Boucle d'ouverture
     windowB.mainloop()

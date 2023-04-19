@@ -10,7 +10,7 @@ def launch_external_app():
     subprocess.run(["python", boisson_file], creationflags=subprocess.CREATE_NO_WINDOW)
 
 def launch_external_app_Admin():
-    boisson_file = os.path.join(os.path.dirname(__file__), "BoissonAdmin.py")
+    boisson_file = os.path.join(os.path.dirname(__file__), "BoissonAdmin_Dictionnaire.py")
     subprocess.run(["python", boisson_file], creationflags=subprocess.CREATE_NO_WINDOW)
 
 def carte_des_boissons():
