@@ -1,6 +1,6 @@
 # New_BARAMINES
 
-La construction du nouveau logiciel de gestio du BARAMINES de l'IMT Mines Albi.
+La construction du nouveau logiciel de gestion du BARAMINES de l'IMT Mines Albi.
 Ce qu'il est possible de faire :
 - Voir une carte des boissons
 - Accès Administrateur ( mot de passe = 123 )
