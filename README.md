@@ -6,6 +6,7 @@ Ce qu'il est possible de faire :
 - Accès Administrateur ( mot de passe = 123 )
 - ce qui permet d'accès aux commandes Ajouter/Supprimer/Editer/Rafraichir la page (seul Ajouter et Rafraichir fonctionne - Rafraichir est inutile enfaite )
 - Cela met à jour automatiquement les donnéees de la carte de boissons
+- lien entre un fichier .JSON et la carte des boissons afin de ne pas réécrire la carte
 - Il y a un launcher dans le dossier principal (Launcher ou Launcher_Dictio) qui permet de lancer directement le logiciel. Juste double-cliquer leeeee.
 
 Reste à faire : 
@@ -14,6 +15,5 @@ PLEINS DE TRUCS
 current_dir = os.getcwd() ))
 - faire un dossier avec les images
 - faire un dossier de sauvegardes
-- faire un lien entre un fichier .JSON et la carte des boissons afin de ne pas réécrire la carte tout le temps ( en cours, cf test.py)
 - Rajouter un titre à chacune des fenêtres
-- render unique les choix de catégorie dans les Combobox
+- rendre unique les choix de catégorie dans les Combobox
