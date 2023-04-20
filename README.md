@@ -10,3 +10,4 @@ Ce qu'il est possible de faire :
 
 Reste à faire : 
 PLEINS DE TRUCS
+- faire passer le chemin d'accès de l'icone et celle du sanglier en universel (cf Launcher.py)
