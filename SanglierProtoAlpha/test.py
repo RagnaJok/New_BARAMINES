@@ -20,6 +20,7 @@ with open("drink_data.json", 'r') as f:
     content = json.load(f)
     print(content)
     print(type(content))
+    print(drink_dict)
 
 # Création d'un label avec le contenu du fichier
 label = tk.Label(root, text=content)

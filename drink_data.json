@@ -1,1 +1,1 @@
-{"Coca-Cola": {"price": 2.0, "quantity": 10}, "Pepsi": {"price": 1.5, "quantity": 15}, "Orangina": {"price": 2.5, "quantity": 5}}
+{"Coca-Cola": {"category": "Boisson gazeuse", "price": "2.50"}, "Pepsi": {"category": "Boisson gazeuse", "price": "2.00"}, "Jus d'orange": {"category": "Jus de fruit", "price": "3.00"}}

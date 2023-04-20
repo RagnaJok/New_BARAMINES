@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from utils import changement_icon
+import json
 
 def Create_Frame():
     global frame
@@ -62,7 +63,7 @@ def update_table(frame, drink_data):
 def AjoutDrink():
     def Ajouter():
         drink_data[Name_entry.get()] = {'category': Category_entry.get(), 'price': Price_entry.get()}
-        print(Name,Categorie,Prix)
+        print(drink_data[Name_entry.get()])
         RefreshDrink()
         Modif.destroy()
 
@@ -144,7 +145,7 @@ def DeleteDrink():
 
     def validate_Name(P):
         # Vérifie si la valeur entrée est dans la liste déroulante
-        return P in Name
+        return P in list(drink_data.keys())
 
     def on_combobox_select(event):
         # Fonction appelée lorsque la boisson est sélectionnée dans la liste déroulante
@@ -171,7 +172,6 @@ def DeleteDrink():
 
     #Infos à remplir
     global Name_entry,Category_entry,Price_entry
-
     Name_label = tk.Label(Modif, text="Nom :",font=('Century SchoolBook',12))
     Name_label.place(relx=0.01,rely=0.4)
     Name_entry = ttk.Combobox(Modif,values=list(drink_data.keys()),width=13,validate='key')
@@ -194,6 +194,11 @@ def DeleteDrink():
 
 def RefreshDrink():
     update_table(frame,drink_data)
+
+def Quitter():
+    with open('drink_data.json',"w") as g:
+        json.dump(drink_data,g)
+    windowB.destroy()
 
 if __name__ == '__main__':
     # Créer une nouvelle fenêtre
@@ -232,33 +237,16 @@ if __name__ == '__main__':
     # Rafaîchir le tableau
     Refresh_Button = tk.Button(windowB,text="Rafraîchir le tableau",font=("Century SchoolBook",15),command=RefreshDrink)
     Refresh_Button.place(relx=0.72,rely=0.4,anchor="nw")
+    # Bouton Exit
+    ExitButton = tk.Button(windowB,text='Enregistrer et quitter la session',command=Quitter, font=('Century SchoolBook',15))
+    ExitButton.place(relx=0.33,rely=0.8)
     
-    # Données du tableau
-    global Name,Categorie,Prix
-    Name = ['Café','Thé','Coca']
-    Categorie = ['Beer','Exceptionnel','Soft']
-    Prix = ['2','7','3']
     
-    global drink_data
-    drink_data = {'Coca-Cola': {'category': 'Boisson gazeuse', 'price': '2.50'},
-              'Pepsi': {'category': 'Boisson gazeuse', 'price': '2.00'},
-              'Sprite': {'category': 'Boisson gazeuse', 'price': '2.00'},
-              "Jus d'orange": {'category': 'Jus de fruit', 'price': '3.00'}}
 
-    # # Création d'une ligne pour chaque donnée
-    # for i, row in enumerate(data):
-    #     for j, cell in enumerate(row):
-    #         # Création d'un cadre pour chaque cellule
-    #         cell_frame = tk.Frame(frame, borderwidth=1, relief='ridge')
-    #         cell_frame.grid(row=i+1, column=j, sticky='nsew', padx=5, pady=5)
-            
-    #         # Ajout de la donnée dans le cadre
-    #         label = tk.Label(cell_frame, text=cell, font=('Arial', 12))
-    #         label.pack(padx=5, pady=5, expand=True, fill='both')
-        
-    #     # Ajout d'un séparateur entre chaque ligne
-    #     sep = ttk.Separator(frame, orient='horizontal')
-    #     sep.grid(row=i+2, column=0, columnspan=3, sticky='ew', padx=5, pady=5)
+#### Faire attention à initialiser avec initialise_dictio.py si KeyError "category"
+    global drink_data
+    with open("drink_data.json", 'r') as f:
+        drink_data = json.load(f)
 
     # Appel de la fonction pour créer le tableau
     create_table(frame,drink_data)

@@ -102,10 +102,7 @@ if __name__ == '__main__':
     for choice in choices:
         listbox.insert(tk.END, choice)
     listbox.pack()  # Utiliser pack() sur le cadre, pas sur la liste    
-    #print("Dimensions de la liste de choix : ", listbox.winfo_width(), listbox.winfo_height())
 
-    # validate_button = tk.Button(window, text="Valider", command=check_password)
-    # validate_button.pack(pady=5)
 
     Boisson_button = tk.Button(window, text="Carte des boissons", command=carte_des_boissons, font=('Century SchoolBook',25))
     Boisson_button.place(relx=0.6,rely=0.8)
