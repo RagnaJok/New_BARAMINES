@@ -12,3 +12,5 @@ Reste à faire :
 PLEINS DE TRUCS
 - faire passer le chemin d'accès de l'icone, du SANGLIER et de la carte des boissons en universel (cf Launcher.py)
 - faire un dossier avec les images
+- faire un dossier de sauvegardes
+- faire un lien entre un dossier.txt et la carte des boissons afin de ne pas réécrire la carte tout le temps
