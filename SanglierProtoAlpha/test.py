@@ -1,15 +1,29 @@
-data = [    ["Café", "Boisson chaude", "2.50"],
-    ["Thé", "Boisson chaude", "2.00"],
-    ["Coca-Cola", "Boisson froide", "3.00"],
-    ["Jus d'orange", "Boisson froide", "3.50"],
-    ["demi de blonde","Bière","5"]  ]
+import tkinter as tk
+import json
 
-data3 = []
-Name = ['Café','Thé','Coca']
-Categorie = ['Beer','Exceptionnel','Soft']
-Prix = ['2','7','5']
+# exemple de dictionnaire de boisson
+drink_dict = {
+    "Coca-Cola": {"price": 2.0, "quantity": 10},
+    "Pepsi": {"price": 1.5, "quantity": 15},
+    "Orangina": {"price": 2.5, "quantity": 5}
+}
 
-for i in range(len(Name)):
-    New_Drink = [Name[i],Categorie[i],Prix[i]]
-    data3.append(New_Drink)
-print(data3)
+# écrire le dictionnaire dans un fichier JSON
+with open("drink_data.json", "w") as f:
+    json.dump(drink_dict, f)
+
+# Création de la fenêtre principale
+root = tk.Tk()
+
+# Ouverture du fichier texte
+with open("drink_data.json", 'r') as f:
+    content = json.load(f)
+    print(content)
+    print(type(content))
+
+# Création d'un label avec le contenu du fichier
+label = tk.Label(root, text=content)
+label.pack()
+
+# Affichage de la fenêtre principale
+root.mainloop()

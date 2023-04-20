@@ -48,8 +48,6 @@ def update_table(frame, drink_data):
     header = ["Boisson", "Catégorie", "Prix"]
     a=1
     for row, (name, drink) in enumerate(drink_data.items(), start=1):
-        a+=1
-        print(a)
         category = drink["category"]
         price = drink["price"]
         for col, value in enumerate([name, category, price]):
@@ -120,12 +118,29 @@ def EditDrink():
 
 def DeleteDrink():    
     def Supprimer():
-        Name.append(Name_entry.get())
-        Categorie.append(Category_entry.get())
-        Prix.append(Price_entry.get())
-        print(Name,Categorie,Prix)
-        RefreshDrink()
-        Modif.destroy()
+        def Delete():
+            del drink_data[Name_entry.get()]
+            Verif.destroy()
+            Modif.destroy()
+            RefreshDrink()
+        def Nop():
+            Verif.destroy()
+
+        Verif = tk.Toplevel(Modif)
+        changement_icon(Verif)
+        width = 700
+        height = 200
+        x = (Verif.winfo_screenwidth() // 2) - (width // 2) -60 # (-) permet de le déplacer vers la gauche
+        y = (Verif.winfo_screenheight() // 2) - (height // 2) -70 # (-) = vers le haut
+        Verif.geometry('{}x{}+{}+{}'.format(width, height, x, y))
+
+        texte = "Etes vous sûr de vouloir supprimer \n -> "+Name_entry.get()+" <-\n de la carte des boissons ?"
+        Verif_Label = tk.Label(Verif,text=texte,font=('Century SchoolBook', 20))
+        Verif_Label.pack()
+        Verif_Button = tk.Button(Verif, text='oui',command=Delete,font=('Century SchoolBook', 20))
+        Verif_Button.place(relx=0.3,rely=0.6)
+        Verif_Button_off = tk.Button(Verif, text='non',command=Nop,font=('Century SchoolBook', 20))
+        Verif_Button_off.place(relx=0.6,rely=0.6)
 
     def validate_Name(P):
         # Vérifie si la valeur entrée est dans la liste déroulante
@@ -133,11 +148,18 @@ def DeleteDrink():
 
     def on_combobox_select(event):
         # Fonction appelée lorsque la boisson est sélectionnée dans la liste déroulante
-        selected_drink = combobox.get() # Récupère la boisson sélectionnée
+        selected_drink = Name_entry.get() # Récupère la boisson sélectionnée
         if selected_drink in drink_data:
             # Si la boisson est dans les données de boisson, met à jour les entrées
-            Category_entry.set(drink_data[selected_drink]['category'])
-            Price_entry.set(drink_data[selected_drink]['price'])
+            Category_entry.config(state='normal')
+            Category_entry.delete(0, tk.END)
+            Category_entry.insert(0, drink_data[selected_drink]['category'])
+            Category_entry.config(state='readonly')
+            
+            Price_entry.config(state='normal')
+            Price_entry.delete(0, tk.END)
+            Price_entry.insert(0, drink_data[selected_drink]['price'])
+            Price_entry.config(state='readonly')
 
     Modif = tk.Toplevel(windowB)
     changement_icon(Modif)
@@ -149,30 +171,24 @@ def DeleteDrink():
 
     #Infos à remplir
     global Name_entry,Category_entry,Price_entry
+
     Name_label = tk.Label(Modif, text="Nom :",font=('Century SchoolBook',12))
     Name_label.place(relx=0.01,rely=0.4)
-    Name_entry = ttk.Combobox(Modif,values=Name,width=13,validate='key')
+    Name_entry = ttk.Combobox(Modif,values=list(drink_data.keys()),width=13,validate='key')
     Name_entry['validatecommand'] = (Modif.register(validate_Name), '%P')
     Name_entry.place(relx=0.1,rely=0.4)
-
-    combobox_values = list(drink_data.keys())
-    combobox = ttk.Combobox(Modif, values=combobox_values, width=20)
-    combobox.pack()
-    combobox.bind('<<ComboboxSelected>>', on_combobox_select) # Associe la fonction à l'événement de sélection de la liste déroulante
-
+    Name_entry.bind('<<ComboboxSelected>>', on_combobox_select) # Associe la fonction à l'événement de sélection de la liste déroulante
 
     Category_label = tk.Label(Modif, text="Catégorie :",font=('Century SchoolBook',12))
     Category_label.place(relx=0.29,rely=0.4)
-    Category_entry = ttk.Combobox(Modif,values=Categorie,width=15)
+    Category_entry = tk.Entry(Modif,width=15)
     Category_entry.place(relx=0.45,rely=0.4)
     
-
     Price_label = tk.Label(Modif, text="Prix :",font=('Century SchoolBook',12))
     Price_label.place(relx=0.69,rely=0.4)
-    Price_entry = ttk.Combobox(Modif,values=Prix,width=15)
+    Price_entry = tk.Entry(Modif,width=15)
     Price_entry.place(relx=0.78,rely=0.4)
     
-
     Validate = tk.Button(Modif,text='Valider',font=('Century SchoolBook',12),command=Supprimer)
     Validate.place(relx= 0.5,rely=0.9,anchor='s')
 
