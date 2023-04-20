@@ -14,6 +14,6 @@ PLEINS DE TRUCS
 current_dir = os.getcwd() ))
 - faire un dossier avec les images
 - faire un dossier de sauvegardes
-- faire un lien entre un dossier.txt et la carte des boissons afin de ne pas réécrire la carte tout le temps
+- faire un lien entre un fichier .JSON et la carte des boissons afin de ne pas réécrire la carte tout le temps ( en cours, cf test.py)
 - Rajouter un titre à chacune des fenêtres
 - render unique les choix de catégorie dans les Combobox
