@@ -131,6 +131,14 @@ def DeleteDrink():
         # Vérifie si la valeur entrée est dans la liste déroulante
         return P in Name
 
+    def on_combobox_select(event):
+        # Fonction appelée lorsque la boisson est sélectionnée dans la liste déroulante
+        selected_drink = combobox.get() # Récupère la boisson sélectionnée
+        if selected_drink in drink_data:
+            # Si la boisson est dans les données de boisson, met à jour les entrées
+            Category_entry.set(drink_data[selected_drink]['category'])
+            Price_entry.set(drink_data[selected_drink]['price'])
+
     Modif = tk.Toplevel(windowB)
     changement_icon(Modif)
     width = 700
@@ -146,6 +154,12 @@ def DeleteDrink():
     Name_entry = ttk.Combobox(Modif,values=Name,width=13,validate='key')
     Name_entry['validatecommand'] = (Modif.register(validate_Name), '%P')
     Name_entry.place(relx=0.1,rely=0.4)
+
+    combobox_values = list(drink_data.keys())
+    combobox = ttk.Combobox(Modif, values=combobox_values, width=20)
+    combobox.pack()
+    combobox.bind('<<ComboboxSelected>>', on_combobox_select) # Associe la fonction à l'événement de sélection de la liste déroulante
+
 
     Category_label = tk.Label(Modif, text="Catégorie :",font=('Century SchoolBook',12))
     Category_label.place(relx=0.29,rely=0.4)

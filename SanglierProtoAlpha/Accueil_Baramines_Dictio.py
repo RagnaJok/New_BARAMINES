@@ -4,6 +4,11 @@ import subprocess, os, multiprocessing
 from utils import changement_icon
 import tkinter.font as tkFont
 
+def on_closing():
+    pass
+
+def Quitter():
+    window.destroy()
 
 def launch_external_app():
     boisson_file = os.path.join(os.path.dirname(__file__), "Boisson.py")
@@ -65,6 +70,7 @@ def print_choice():
 if __name__ == '__main__':
     # Créer la fenêtre
     window = tk.Tk()
+    window.protocol("WM_DELETE_WINDOW",on_closing)
     window.title("Accueil Baramines")
     label_accueil = tk.Label(window, text="Sanglier V.ProtoAlpha", font=('Century SchoolBook',40))
     label_accueil.pack(padx=20,pady=20)
@@ -80,6 +86,11 @@ if __name__ == '__main__':
     window.geometry('{}x{}+{}+{}'.format(width, height, x, y))
     window.config()
 
+    # Afficher une image de sanglier
+    Sanglier = tk.PhotoImage(file='C:\\Users\\jo\\Documents\\Cours\\M1\\BARAMINES\\NewSoftware\\SANGLIER.png')
+    SanglierImage = tk.Label(window,image=Sanglier)
+    SanglierImage.place(relx=0.1,rely=0.15)
+
     # Créer une liste de choix
     choices = ["Choix 1", "Choix 2", "Choix 3"]
     frame = tk.Frame(window)
@@ -93,23 +104,17 @@ if __name__ == '__main__':
     listbox.pack()  # Utiliser pack() sur le cadre, pas sur la liste    
     #print("Dimensions de la liste de choix : ", listbox.winfo_width(), listbox.winfo_height())
 
-    # Ajouter un champ d'entrée pour le mot de passe
-    password_label = tk.Label(window, text="Mot de passe:")
-    password_label.pack(pady=5)
-    password_entry = tk.Entry(window, show="*")
-    password_entry.pack(pady=5)
-
     # validate_button = tk.Button(window, text="Valider", command=check_password)
     # validate_button.pack(pady=5)
 
     Boisson_button = tk.Button(window, text="Carte des boissons", command=carte_des_boissons, font=('Century SchoolBook',25))
-    Boisson_button.place(x=width-480,y=120)
+    Boisson_button.place(relx=0.6,rely=0.8)
     
-    Admin_Button = tk.Button(window, text='Administrateur', command=PassAdmin, font=('Century SchoolBook',15))
-    Admin_Button.place(w=width-480,y=500)
+    Admin_Button = tk.Button(window, text='Administrateur', command=PassAdmin, font=('Century SchoolBook',25))
+    Admin_Button.place(relx=0.1,rely=0.8)
 
-
-   
+    ExitButton = tk.Button(window,text='Enregistrer et quitter la session',command=Quitter, font=('Century SchoolBook',15))
+    ExitButton.pack()
 
     # Empêcher le cadre de la liste de choix de s'étendre
     frame.pack_propagate(False)
