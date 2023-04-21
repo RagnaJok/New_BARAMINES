@@ -1,5 +1,5 @@
 # New_BARAMINES
-Si vous voulez le télécharger, cliquer [ici]([https://github.com/Shaztronix/New_BARAMINES/releases/tag/Sanglier-v0.0.19.3-ProtoAlpha](https://github.com/Shaztronix/New_BARAMINES/archive/refs/tags/Sanglier-v0.0.19.3-ProtoAlpha.zip)) et sortez le de son archive. Ensuite ouvrer Launcher :)
+Si vous voulez le télécharger, cliquer [ici](https://github.com/Shaztronix/New_BARAMINES/archive/refs/tags/Sanglier-v0.0.19.3-ProtoAlpha.zip) et sortez le de son archive. Ensuite ouvrer Launcher :)
 
 
 
