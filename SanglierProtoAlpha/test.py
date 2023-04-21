@@ -1,30 +1,15 @@
-import tkinter as tk
-import json
+from tkinter import *
 
-# exemple de dictionnaire de boisson
-drink_dict = {
-    "Coca-Cola": {"price": 2.0, "quantity": 10},
-    "Pepsi": {"price": 1.5, "quantity": 15},
-    "Orangina": {"price": 2.5, "quantity": 5}
-}
+fenetre = Tk()
 
-# écrire le dictionnaire dans un fichier JSON
-with open("drink_data.json", "w") as f:
-    json.dump(drink_dict, f)
+canvas = Canvas(fenetre, width=3000, height=3000)
+canvas.pack()
 
-# Création de la fenêtre principale
-root = tk.Tk()
-
-# Ouverture du fichier texte
-with open("drink_data.json", 'r') as f:
-    content = json.load(f)
-    print(content)
-    print(type(content))
-    print(drink_dict)
-
-# Création d'un label avec le contenu du fichier
-label = tk.Label(root, text=content)
-label.pack()
-
-# Affichage de la fenêtre principale
-root.mainloop()
+for i in range(3000):
+    r = int(255 * i / 3000)
+    g = int(255 * (3000 - i) / 3000)
+    b = 0
+    couleur = "#%02x%02x%02x" % (r, g, b)
+    canvas.create_line(0, i, 3000, i, fill=couleur)
+canvas.create_text(200, 200, text="Hello World!", fill="white", font=("Arial", 24))
+fenetre.mainloop()

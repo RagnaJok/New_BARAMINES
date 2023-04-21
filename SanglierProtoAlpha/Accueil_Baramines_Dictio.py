@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import subprocess, os, multiprocessing
 from utils import changement_icon
-import tkinter.font as tkFont
+from datetime import datetime
 
 def on_closing():
     pass
@@ -17,6 +17,10 @@ def launch_external_app():
 def launch_external_app_Admin():
     boisson_file = os.path.join(os.path.dirname(__file__), "BoissonAdmin_Dictionnaire.py")
     subprocess.run(["python", boisson_file], creationflags=subprocess.CREATE_NO_WINDOW)
+
+def Vente():
+    GestionVente = os.path.join(os.path.dirname(__file__), "GestionVente.py")
+    subprocess.run(["python", GestionVente], creationflags=subprocess.CREATE_NO_WINDOW)
 
 def carte_des_boissons():
     p = multiprocessing.Process(target=launch_external_app)
@@ -57,24 +61,26 @@ def PassAdmin():
     validate_button.pack(pady=5)
     password_entry.bind('<Return>', on_enter)
 
-
- # Fonction pour afficher le choix sélectionné
-def print_choice():
-    selection = listbox.curselection()
-    if selection:
-        index = selection[0]
-        value = listbox.get(index)
-        print("Choix sélectionné :", value)
-
-        
 if __name__ == '__main__':
     # Créer la fenêtre
     window = tk.Tk()
     window.protocol("WM_DELETE_WINDOW",on_closing)
     window.title("Accueil Baramines")
     label_accueil = tk.Label(window, text="Sanglier V.ProtoAlpha", font=('Century SchoolBook',40))
-    label_accueil.pack(padx=20,pady=20)
+    label_accueil.place(relx=0.2,rely=0)
     
+    ## DATE DERNIERE MAJ
+    date_path = os.path.join(os.path.dirname(__file__), "Accueil_Baramines_Dictio.py")
+
+    # Récupération de la date de dernière modification
+    mod_time = os.path.getmtime(date_path)
+    mod_date = datetime.fromtimestamp(mod_time).strftime("%Y-%m-%d %H:%M")
+
+    date_label = tk.Label(window, text="Dernière mise à jour : " + mod_date)
+    date_label.place(relx=0.77, rely=0.96)
+
+
+
     # Définition de l'icône de la fenêtre
     changement_icon(window)
 
@@ -89,32 +95,19 @@ if __name__ == '__main__':
     # Afficher une image de sanglier
     Sanglier = tk.PhotoImage(file='C:\\Users\\jo\\Documents\\Cours\\M1\\BARAMINES\\NewSoftware\\SANGLIER.png')
     SanglierImage = tk.Label(window,image=Sanglier)
-    SanglierImage.place(relx=0.1,rely=0.15)
-
-    # Créer une liste de choix
-    choices = ["Choix 1", "Choix 2", "Choix 3"]
-    frame = tk.Frame(window)
-    frame.pack(pady=10)
-    frame.place(x=20, y=20)
-    frame.config(width=100, height=75, borderwidth=2, relief=tk.SOLID)
-
-    listbox = tk.Listbox(frame)  # Ajouter la liste à l'intérieur du cadre
-    for choice in choices:
-        listbox.insert(tk.END, choice)
-    listbox.pack()  # Utiliser pack() sur le cadre, pas sur la liste    
-
+    SanglierImage.place(relx=0.1,rely=0.20)
 
     Boisson_button = tk.Button(window, text="Carte des boissons", command=carte_des_boissons, font=('Century SchoolBook',25))
-    Boisson_button.place(relx=0.6,rely=0.8)
+    Boisson_button.place(relx=0.605,rely=0.85)
     
     Admin_Button = tk.Button(window, text='Administrateur', command=PassAdmin, font=('Century SchoolBook',25))
-    Admin_Button.place(relx=0.1,rely=0.8)
+    Admin_Button.place(relx=0.1,rely=0.85)
 
     ExitButton = tk.Button(window,text='Enregistrer et quitter la session',command=Quitter, font=('Century SchoolBook',15))
-    ExitButton.pack()
+    ExitButton.place(relx=0.505,rely=0.125)
 
-    # Empêcher le cadre de la liste de choix de s'étendre
-    frame.pack_propagate(False)
+    Vente_Button = tk.Button(window,text='Mode Vente',command=Vente,font=('Century SchoolBook',20))
+    Vente_Button.place(relx=0.201,rely=0.108)
 
     # Lancer la boucle principale d'événements
     window.mainloop()

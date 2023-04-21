@@ -3,6 +3,9 @@ from tkinter import ttk
 from utils import changement_icon
 import json
 
+def on_closing():
+    pass
+
 def Create_Frame():
     global frame
     frame = tk.Frame(windowB)
@@ -19,7 +22,6 @@ def create_table(frame, drink_data):
     # Création d'une ligne pour chaque donnée
     for i, drink in enumerate(drink_data):
         row = drink_data[drink]
-        print(row)
         # Création d'un cadre pour chaque cellule
         cell_frame1 = tk.Frame(frame, borderwidth=1, relief='ridge')
         cell_frame1.grid(row=i+1, column=0, sticky='nsew', padx=5, pady=5)
@@ -63,7 +65,6 @@ def update_table(frame, drink_data):
 def AjoutDrink():
     def Ajouter():
         drink_data[Name_entry.get()] = {'category': Category_entry.get(), 'price': Price_entry.get()}
-        print(drink_data[Name_entry.get()])
         RefreshDrink()
         Modif.destroy()
 
@@ -100,7 +101,7 @@ def AjoutDrink():
     Category_label = tk.Label(Modif, text="Catégorie :",font=('Century SchoolBook',12))
     Category_label.place(relx=0.29,rely=0.4)
     categories = [drink['category'] for drink in drink_data.values()]
-    Category_entry = ttk.Combobox(Modif, values=categories, width=15)
+    Category_entry = ttk.Combobox(Modif, values=categories_liste, width=15)
     Category_entry.place(relx=0.45,rely=0.4)
     
 
@@ -203,6 +204,7 @@ def Quitter():
 if __name__ == '__main__':
     # Créer une nouvelle fenêtre
     windowB = tk.Tk()
+    windowB.protocol("WM_DELETE_WINDOW",on_closing)
     windowB.title("Carte des boissons - Admin")
 
     # Ajouter des widgets à la nouvelle fenêtre
@@ -247,6 +249,16 @@ if __name__ == '__main__':
     global drink_data
     with open("drink_data.json", 'r') as f:
         drink_data = json.load(f)
+
+    # Création d'un ensemble vide pour stocker les catégories uniques
+    categories = set()
+
+    # Boucle pour parcourir chaque boisson et ajouter sa catégorie à l'ensemble
+    for boisson in drink_data.values():
+        categories.add(boisson['category'])
+
+    # Conversion de l'ensemble en liste
+    categories_liste = list(categories)
 
     # Appel de la fonction pour créer le tableau
     create_table(frame,drink_data)
