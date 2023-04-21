@@ -20,8 +20,7 @@ current_dir = os.getcwd() ))
 - faire un dossier avec les images
 - faire un dossier de sauvegardes
 - Rajouter un titre à chacune des fenêtres
-- rendre unique les choix de catégorie dans les Combobox (en cours, fait dans Supprimer)
-- Rajouter la date (où ?) de la dernière mise à jour du fichier/ carte des boissons
+- Rajouter la date (où ?) de la dernière mise à jour du fichier/ carte des boissons (en cours)
 - et rajouter la fenêtre de prévention si la carte des boissons a été modifié récemment (idée : comparer les dates de dernieres maj de la carte des boissons avec ?)
 - Revoir le chemin de la Carte des Boissons sur l'écran d'accueil
 - rajouter dans utils.py une fonction uniquement dédié à la création de la carte des boissons ?
