@@ -24,3 +24,7 @@ current_dir = os.getcwd() ))
 - Rajouter la date (où ?) de la dernière mise à jour du fichier/ carte des boissons
 - et rajouter la fenêtre de prévention si la carte des boissons a été modifié récemment (idée : comparer les dates de dernieres maj de la carte des boissons avec ?)
 - Revoir le chemin de la Carte des Boissons sur l'écran d'accueil
+- rajouter dans utils.py une fonction uniquement dédié à la création de la carte des boissons ?
+- Ou faire un fichier d'affichage de la carte des boissons
+- en tout cas, changer celui de mode vente en enlevant la version Admin
+- Rajouter une fonction dans utils.py permettant de faire une case de couleur
