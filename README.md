@@ -1,5 +1,9 @@
 # New_BARAMINES
+Si vous voulez le télécharger, cliquer [ici]([https://github.com/Shaztronix/New_BARAMINES/releases/tag/Sanglier-v0.0.19.3-ProtoAlpha](https://github.com/Shaztronix/New_BARAMINES/archive/refs/tags/Sanglier-v0.0.19.3-ProtoAlpha.zip)) et sortez le de son archive. Ensuite ouvrer Launcher :)
 
+
+
+# Fonctionnalités
 La construction du nouveau logiciel de gestion du BARAMINES de l'IMT Mines Albi.
 Ce qu'il est possible de faire :
 - Voir une carte des boissons
@@ -9,7 +13,7 @@ Ce qu'il est possible de faire :
 - lien entre un fichier .JSON et la carte des boissons afin de ne pas réécrire la carte
 - Il y a un launcher dans le dossier principal (Launcher ou Launcher_Dictio) qui permet de lancer directement le logiciel. Juste double-cliquer leeeee.
 
-Reste à faire : 
+# Reste à faire : 
 PLEINS DE TRUCS
 - faire passer le chemin d'accès de l'icone, du SANGLIER et de la carte des boissons en universel (cf Launcher.py)(( # Récupérer le répertoire courant
 current_dir = os.getcwd() ))
